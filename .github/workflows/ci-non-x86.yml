@@ -56,7 +56,7 @@ jobs:
             pwd
             git clone https://github.com/hugsy/gef
             echo source $(pwd)/gef/gef.py >> ~/.gdbinit
-            gdb -q -ex gef -ex 'gef missing' -ex version -ex 'pi current_arch' -ex 'show architecture' -ex quit
+            gdb -q -ex gef -ex 'gef missing' -ex version -ex 'show architecture' -ex start  -ex 'pi current_arch' -ex continue -ex quit /bin/ls
             cd gef
             make lint
             make test

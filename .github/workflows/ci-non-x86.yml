@@ -23,8 +23,8 @@ jobs:
             distro: ubuntu20.04            
 
     steps:
-      - uses: actions/checkout@v2.1.0
-      - uses: uraimo/run-on-arch-action@v2.0.5
+      - uses: actions/checkout@v2.3.4
+      - uses: uraimo/run-on-arch-action@v2.1.1
         name: Running tests on ${{ matrix.arch }} / ${{ matrix.distro }}
         id: run_tests
         with:
@@ -34,6 +34,7 @@ jobs:
           #setup: |
           #  mkdir -p "${PWD}/artifacts"
           #dockerRunArgs: |
+          #  --platform linux/arm/v7
           #  --volume "${PWD}/artifacts:/artifacts"
 
           env: | 
@@ -50,8 +51,11 @@ jobs:
 
           run: |
             id
-            uname          
-            wget -O ~/.gdbinit-gef.py -q http://gef.blah.cat/py
-            echo source ~/.gdbinit-gef.py >> ~/.gdbinit
-            gdb -ex gef -ex quit
-   
+            uname -a
+            pwd
+            git clone https://github.com/hugsy/gef
+            echo source $(pwd)/gef/gef.py >> ~/.gdbinit
+            gdb -q -ex gef -ex 'gef missing' -ex version -ex quit
+            cd gef
+            make lint
+            make test

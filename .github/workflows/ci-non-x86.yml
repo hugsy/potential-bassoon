@@ -43,18 +43,14 @@ jobs:
           shell: /bin/bash
 
           install: |
-            case "${{ matrix.arch }}" in
-              aarch64|armv7|ppc64le)
-                apt-get update
-                apt-get install -y wget curl gdb-multiarch python3-dev python3-pip python3-wheel python3-setuptools git cmake gcc g++ pkg-config libglib2.0-dev
-                python3 -m pip install --upgrade pip
-                bash -c "$(wget http://gef.blah.cat/sh -O -)"
-                ;;
-            esac
-
-          run: |
+            apt-get update
+            apt-get install -y wget curl gdb gdb-multiarch python3-dev python3-pip python3-wheel python3-setuptools git cmake gcc g++ pkg-config libglib2.0-dev
+            python3 -m pip install --upgrade pip
             bash -c "$(wget http://gef.blah.cat/sh -O -)"
 
-      - name: Get the output for ${{ matrix.arch }} / ${{ matrix.distro }}
-        run: |
-          /usr/bin/gdb-multiarch -ex gef -ex quit
+          run: |
+            id
+            uname          
+            bash -c "$(wget http://gef.blah.cat/sh -O -)"
+            gdb -ex gef -ex quit
+            gdb-multiarch -ex gef -ex quit          

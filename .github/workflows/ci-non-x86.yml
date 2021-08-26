@@ -57,4 +57,4 @@ jobs:
 
       - name: Get the output for ${{ matrix.arch }} / ${{ matrix.distro }}
         run: |
-          gdb -ex gef -ex quit
+          /usr/bin/gdb-multiarch -ex gef -ex quit

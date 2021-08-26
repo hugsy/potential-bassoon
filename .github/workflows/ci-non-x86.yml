@@ -59,4 +59,4 @@ jobs:
             gdb -q -ex gef -ex 'gef missing' -ex version -ex 'show architecture' -ex start  -ex 'pi current_arch' -ex continue -ex quit /bin/ls
             cd gef
             make lint
-            make test
+            

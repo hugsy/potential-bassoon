@@ -6,17 +6,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - os: windows-latest
-            generator: msvc
-            arch: x64
-            config: RelWithDebInfo
-          - os: windows-latest
-            generator: msvc
-            arch: win32
-            config: [1, 2]
+        python-version: [3.9]
+        variant:
+          - {os: windows-latest, generator: msvc, arch: x64, config: Release} 
+          - {os: ubuntu-latest, generator: clang, arch: x64, config: Release} 
+          - {os: macos-latest, generator: clang, arch: x64, config: Release} 
 
-    runs-on: ${{ matrix.os }}
-    name: ${{ matrix.os }} / ${{ matrix.generator }} / ${{ matrix.arch }}
+    runs-on: ${{ matrix.variant.os }}
+    name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
     steps:
-      - run: echo Run ${{ matrix.os }} / ${{ matrix.generator }} / ${{ matrix.arch }} / ${{ matrix.config }}
+      - run: echo Run ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
+      

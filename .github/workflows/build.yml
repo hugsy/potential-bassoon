@@ -1,0 +1,42 @@
+name: tests
+on: push
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.9]
+        include:
+          - os: windows-latest
+            generator: msvc
+            arch: x64
+            config: RelWithDebInfo
+          - os: windows-latest
+            generator: msvc
+            arch: win32
+            config: RelWithDebInfo
+          - os: windows-latest
+            generator: msvc
+            arch: arm64
+            config: RelWithDebInfo
+          - os: windows-latest
+            generator: ninja
+            arch: x64
+            config: RelWithDebInfo
+          - os: ubuntu-latest
+            generator: clang
+            arch: x64
+            config: RelWithDebInfo
+          - os: ubuntu-latest
+            generator: gcc
+            arch: x64
+            config: RelWithDebInfo
+          - os: macos-latest
+            generator: clang
+            arch: x64
+            config: Release
+    runs-on: ${{ matrix.os }}
+    name: ${{ matrix.os }} / ${{ matrix.generator }} / ${{ matrix.arch }}
+    steps:
+      - run: echo Run ${{ matrix.os }} / ${{ matrix.generator }} / ${{ matrix.arch }} / ${{ matrix.config }}

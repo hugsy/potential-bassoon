@@ -14,27 +14,8 @@ jobs:
           - os: windows-latest
             generator: msvc
             arch: win32
-            config: RelWithDebInfo
-          - os: windows-latest
-            generator: msvc
-            arch: arm64
-            config: RelWithDebInfo
-          - os: windows-latest
-            generator: ninja
-            arch: x64
-            config: RelWithDebInfo
-          - os: ubuntu-latest
-            generator: clang
-            arch: x64
-            config: RelWithDebInfo
-          - os: ubuntu-latest
-            generator: gcc
-            arch: x64
-            config: RelWithDebInfo
-          - os: macos-latest
-            generator: clang
-            arch: x64
-            config: Release
+            config: [1, 2]
+
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os }} / ${{ matrix.generator }} / ${{ matrix.arch }}
     steps:

@@ -20,7 +20,7 @@ jobs:
         if: matrix.variant.os == 'ubuntu-latest'
         with:
           script: |
-            const comment = `## 🤖 Coverage Update
+            const comment = `## 🤖 Coverage Update ${ env.GITHUB_SHA }
               | | |
               |-|-|
               | Commit | 0 |

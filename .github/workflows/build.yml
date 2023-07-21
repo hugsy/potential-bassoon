@@ -16,4 +16,16 @@ jobs:
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
     steps:
       - run: echo Run ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
-      
+      - uses: actions/github-script@v6
+        if: matrix.variant.os == 'ubuntu-latest'
+        with:
+          script: |
+            const comment = `## 🤖 Coverage Update
+
+              | Commit | 0 |
+              | Current Coverage | 1 |
+              | New Coverage | 2 |
+              | Diff | 3 |
+            `;
+            const { owner, repo, number } = context.issue;
+            await github.rest.issues.createComment({ owner, repo, issue_number: 1, body: comment });

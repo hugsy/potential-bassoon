@@ -21,7 +21,8 @@ jobs:
         with:
           script: |
             const comment = `## 🤖 Coverage Update
-
+              | | |
+              |-|-|
               | Commit | 0 |
               | Current Coverage | 1 |
               | New Coverage | 2 |

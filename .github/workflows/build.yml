@@ -19,5 +19,5 @@ jobs:
         if: matrix.variant.os == 'windows-latest'
         run: |
           C:\msys64\usr\bin\pacman.exe --confirm -Syuu
-          C:\msys64\usr\bin\pacman.exe --confirm -S mingw-w64-x86_64-gdb-multiarch 
+          C:\msys64\usr\bin\pacman.exe --confirm -Sy mingw-w64-x86_64-gdb-multiarch 
           

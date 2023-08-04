@@ -15,11 +15,14 @@ jobs:
     runs-on: ${{ matrix.variant.os }}
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
     steps:
-      - name: A
+      - name: A 
         if: matrix.variant.os == 'windows-latest'
         run: |
           C:\msys64\usr\bin\pacman.exe --confirm -Syuu
           C:\msys64\usr\bin\pacman.exe --noconfirm -S mingw-w64-x86_64-gdb-multiarch 
-          C:\msys64\bin\gdb-multiarch.exe -ex 'pi print("hello")' --ex quit c:\windows\system32\notepad.exe
+      - name: B 
+        if: matrix.variant.os == 'windows-latest'
+        run: |
+          C:\msys64\mingw64\bin\gdb-multiarch.exe -ex 'pi print("hello")' --ex quit c:\windows\system32\notepad.exe
 
           

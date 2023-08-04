@@ -20,6 +20,6 @@ jobs:
         run: |
           C:\msys64\usr\bin\pacman.exe --confirm -Syuu
           C:\msys64\usr\bin\pacman.exe --noconfirm -S mingw-w64-x86_64-gdb-multiarch 
-          C:\msys64\usr\bin\gdb.exe -ex 'pi print("hello")' --ex quit c:\windows\system32\notepad.exe
-           
+          C:\msys64\usr\bin\gdb-multiarch.exe -ex 'pi print("hello")' --ex quit c:\windows\system32\notepad.exe
+
           

@@ -18,4 +18,5 @@ jobs:
       - name: A
         if: matrix.variant.os == 'windows-latest'
         run: |
-          choco install gdb
+          c:\msys64\mingw64\bin\pacman.exe -Syuu
+          pacman -Ss gdb

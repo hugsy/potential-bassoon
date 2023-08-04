@@ -18,5 +18,6 @@ jobs:
       - name: A
         if: matrix.variant.os == 'windows-latest'
         run: |
-          C:\msys64\usr\bin\pacman.exe -Syuu
+          C:\msys64\usr\bin\pacman.exe --confirm -Syuu
+          C:\msys64\usr\bin\pacman.exe --confirm -Sc gdb
           

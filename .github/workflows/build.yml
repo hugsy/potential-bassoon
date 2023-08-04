@@ -16,6 +16,6 @@ jobs:
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
     steps:
       - name: A
-        if: matrix.variant.os == "windows-latest"
+        if: matrix.variant.os == 'windows-latest'
         run: |
           choco install gdb

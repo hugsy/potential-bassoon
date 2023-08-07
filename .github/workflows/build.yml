@@ -62,11 +62,11 @@ jobs:
               labels: ['documentation']
             });
           } else {
-            await github.rest.issues.removeLabels({
+            await github.rest.issues.removeLabel({
               owner: owner,
               repo: repo,
               issue_number: number,
-              labels: ['documentation']
+              label: 'documentation'
             });
           }
 
@@ -79,10 +79,10 @@ jobs:
               labels: ['automation/ci']
             })
           } else {
-            await github.rest.issues.removeLabels({
+            await github.rest.issues.removeLabel({
               owner: owner,
               repo: repo,
               issue_number: number,
-              labels: ['automation/ci']
+              label: 'automation/ci'
             });
           }        

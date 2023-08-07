@@ -33,24 +33,12 @@ jobs:
         include_docs=$(git diff ${{ github.event.before }} ${{ github.event.after }} --compact-summary | egrep  --count '^ docs/' || true)
         echo "include_docs=0" >> $GITHUB_OUTPUT
         
-    - uses: mondeja/remove-labels-gh-action@v1
-      if: ${{ steps.get_coverage.outputs.include_docs }} == 0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        labels: documentation
-
-    - uses: mondeja/remove-labels-gh-action@v1
-      if: ${{ steps.get_coverage.outputs.include_tests }} == 0
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        labels: automation/ci
-
     - uses: actions-ecosystem/action-add-labels@v1
-      if: ${{ steps.get_coverage.outputs.include_docs }} > 0
+      if: ${{ steps.get_coverage.outputs.include_docs }} != 0
       with:
         labels: documentation
 
     - uses: actions-ecosystem/action-add-labels@v1
-      if: ${{ steps.get_coverage.outputs.include_tests }} > 0
+      if: ${{ steps.get_coverage.outputs.include_tests }} != 0
       with:
         labels: automation/ci

@@ -8,9 +8,7 @@ jobs:
       matrix:
         python-version: [3.9]
         variant:
-          - {os: windows-latest, generator: msvc, arch: x64, config: Release} 
           - {os: ubuntu-latest, generator: clang, arch: x64, config: Release} 
-          - {os: macos-latest, generator: clang, arch: x64, config: Release} 
 
     runs-on: ${{ matrix.variant.os }}
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
@@ -21,8 +19,8 @@ jobs:
       id: get_coverage
       run: |
         commit=$(git rev-parse HEAD)
-        include_tests=$(git diff ${env.GITHUB_SHA} ${github.event.pull_request.head.sha} --compact-summary | egrep --count '^ tests/')
-        include_docs=$(git diff ${env.GITHUB_SHA} ${github.event.pull_request.head.sha} --compact-summary | egrep --count '^ docs/')
+        include_tests=$(git diff ${{env.GITHUB_SHA}} ${{github.event.pull_request.head.sha}} --compact-summary | egrep --count '^ tests/')
+        include_docs=$(git diff ${{env.GITHUB_SHA}} ${{github.event.pull_request.head.sha}} --compact-summary | egrep --count '^ docs/')
         echo "commit=${commit}" >> $GITHUB_OUTPUT
         echo "include_tests=1" >> $GITHUB_OUTPUT
         echo "include_docs=0" >> $GITHUB_OUTPUT

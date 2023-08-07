@@ -55,17 +55,34 @@ jobs:
           await github.rest.issues.createComment({ owner, repo, issue_number: number, body: comment });
 
           if(docs_changes > 0) {
-            await github.rest.issues.addLabels({              
-              issue_number: number,
+            await github.rest.issues.addLabels({
               owner: owner,
-              repo: repo, 
-              labels: ['documentation']});
+              repo: repo,
+              issue_number: number,
+              labels: ['documentation']
+            });
+          } else {
+            await github.rest.issues.removeLabels({
+              owner: owner,
+              repo: repo,
+              issue_number: number,
+              labels: ['documentation']
+            });
           }
 
+
           if(tests_changes > 0) {
-            await github.rest.issues.addLabels({              
-              issue_number: number,
+            await github.rest.issues.addLabels({
               owner: owner,
-              repo: repo, 
-              labels: ['automation']});
-          }          
+              repo: repo,
+              issue_number: number,
+              labels: ['automation/ci']
+            })
+          } else {
+            await github.rest.issues.removeLabels({
+              owner: owner,
+              repo: repo,
+              issue_number: number,
+              labels: ['automation/ci']
+            });
+          }        

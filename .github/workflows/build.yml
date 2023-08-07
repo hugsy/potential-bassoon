@@ -52,7 +52,7 @@ jobs:
           `;
 
           const { owner, repo, number } = context.issue;
-          await github.rest.issues.createComment({ owner, repo, issue_number: number, body: comment });
+
 
           if(docs_changes > 0) {
             await github.rest.issues.addLabels({              
@@ -63,5 +63,5 @@ jobs:
           }
 
           if(tests_changes > 0) {
-            // await github.rest.issues.addLabels({owner, repo, issue_number: number, labels: ['automation']});
+
           }          

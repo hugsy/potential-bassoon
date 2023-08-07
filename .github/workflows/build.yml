@@ -28,9 +28,9 @@ jobs:
         set -x
         commit=$(git rev-parse HEAD)
         echo "commit=${commit}" >> $GITHUB_OUTPUT
-        include_tests=$(git diff ${{ github.event.before }} ${{ github.event.after }} --compact-summary | egrep --silent --count '^ tests/')
+        include_tests=$(git diff ${{ github.event.before }} ${{ github.event.after }} --compact-summary | egrep  --count '^ tests/')
         echo "include_tests=1" >> $GITHUB_OUTPUT
-        include_docs=$(git diff ${{ github.event.before }} ${{ github.event.after }} --compact-summary | egrep --silent --count '^ docs/')
+        include_docs=$(git diff ${{ github.event.before }} ${{ github.event.after }} --compact-summary | egrep  --count '^ docs/')
         echo "include_docs=0" >> $GITHUB_OUTPUT
         
     - uses: mondeja/remove-labels-gh-action@v1

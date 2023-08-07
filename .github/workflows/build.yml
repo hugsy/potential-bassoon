@@ -55,11 +55,11 @@ jobs:
           await github.rest.issues.createComment({ owner, repo, issue_number: number, body: comment });
 
           if(docs_changes > 0) {
-            await github.rest.issues.addLabels({
+            await github.rest.issues.addLabel({
               owner: owner,
               repo: repo,
               issue_number: number,
-              labels: ['documentation']
+              name: 'documentation'
             });
           } else {
             await github.rest.issues.removeLabel({
@@ -72,11 +72,11 @@ jobs:
 
 
           if(tests_changes > 0) {
-            await github.rest.issues.addLabels({
+            await github.rest.issues.addLabel({
               owner: owner,
               repo: repo,
               issue_number: number,
-              labels: ['automation']
+              name: 'automation'
             })
           } else {
             await github.rest.issues.removeLabel({

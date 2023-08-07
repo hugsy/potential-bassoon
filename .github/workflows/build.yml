@@ -10,7 +10,7 @@ jobs:
         variant:
           - {os: ubuntu-latest, generator: clang, arch: x64, config: Release} 
 
-    runs-on: ${{ matrix.variant.os }}
+    runs-on: ubuntu-latest
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
     steps:
     - uses: actions/checkout@v3
@@ -52,20 +52,20 @@ jobs:
           `;
 
           const { owner, repo, number } = context.issue;
-
+          await github.rest.issues.createComment({ owner, repo, issue_number: number, body: comment });
 
           if(docs_changes > 0) {
             await github.rest.issues.addLabels({              
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo, 
+              issue_number: number,
+              owner: owner,
+              repo: repo, 
               labels: ['documentation']});
           }
 
           if(tests_changes > 0) {
             await github.rest.issues.addLabels({              
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo, 
+              issue_number: number,
+              owner: owner,
+              repo: repo, 
               labels: ['automation']});
           }          

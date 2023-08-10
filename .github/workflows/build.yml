@@ -15,10 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: microsoft/setup-msbuild@v1
+      - uses: ilammy/msvc-dev-cmd@v1
       - name: A 
         if: matrix.variant.os == 'windows-latest'
         run: |
           .\build.bat
-      - name: B
-        run: |
-          ls -Recurse

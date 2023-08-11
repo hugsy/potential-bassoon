@@ -20,3 +20,4 @@ jobs:
         if: matrix.variant.os == 'windows-latest'
         run: |
           .\build.bat
+          ls -Recurse

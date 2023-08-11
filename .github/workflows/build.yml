@@ -20,4 +20,13 @@ jobs:
         if: matrix.variant.os == 'windows-latest'
         run: |
           .\build.bat
+      - name: B
+        run: |
           ls -Recurse
+      - name: Publish artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: bochscpu_${{ matrix.variant.generator }}_${{ matrix.variant.arch }}_${{ github.sha }}
+          path: |
+            bxbuild-win/bochscpu-ffi/bochscpu.h*
+            bxbuild-win/bochscpu-ffi/target/release

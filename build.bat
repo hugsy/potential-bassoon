@@ -37,6 +37,7 @@ REM cargo clean -p bochscpu shits its pants on my computer so rebuilding everyth
 cargo clean
 cargo build
 cargo build --release
+cargo build --debug
 
 REM Get back to where we were.
 popd

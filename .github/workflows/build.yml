@@ -16,13 +16,13 @@ jobs:
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
     steps:
       - id: aaaa
-        run: echo aa=bbbbbbb >> $GITHUB_OUTPUT
+        run: echo a=bbbbbbb >> $GITHUB_OUTPUT
 
       - uses: actions/github-script@v7
         with:
           script: |
-            const aa = "${{ steps.aaaa.outputs.a }}";
-            const comment = `## 🤖 xxxxxx -> ${ aa }
+            const a = "${{ steps.aaaa.outputs.a }}";
+            const comment = `## 🤖 ${ a }
 
               * asdasd
 

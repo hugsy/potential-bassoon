@@ -18,6 +18,10 @@ jobs:
 
     runs-on: ${{ matrix.variant.os }}
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: write
     steps:
       - id: aaaa
         run: echo a=bbbbbbb >> $GITHUB_OUTPUT
@@ -25,9 +29,9 @@ jobs:
       - name: Post comment on PR
         run: |
           set -x
-          echo aaa
+          echo aaass
           PR_NUMBER=${{ github.event.number }}
-          GITHUB_TOKEN="${{ secrets.POST_COMMENT }}"
+          GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
           COMMENT="Thank you for the pull request! 🚀"
           curl \
             -X POST \

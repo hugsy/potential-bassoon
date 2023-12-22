@@ -1,20 +1,24 @@
 name: tests
 on:
-  pull_request:
+  pull_request_target:
     types:
       - opened
       - synchronize
 
 jobs:
   build:
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
     strategy:
       fail-fast: false
       matrix:
         python-version: [3.9]
         variant:
-          # - {os: windows-latest, generator: msvc, arch: x64, config: Release} 
-          - {os: ubuntu-latest, generator: clang, arch: x64, config: Release} 
-          # - {os: macos-latest, generator: clang, arch: x64, config: Release} 
+          # - {os: windows-latest, generator: msvc, arch: x64, config: Release}
+          - {os: ubuntu-latest, generator: clang, arch: x64, config: Release}
+          # - {os: macos-latest, generator: clang, arch: x64, config: Release}
 
     runs-on: ${{ matrix.variant.os }}
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
@@ -22,15 +26,16 @@ jobs:
       - id: aaaa
         run: echo a=bbbbbbb >> $GITHUB_OUTPUT
 
-      - uses: actions/github-script@v7
-        with:
-          script: |
-            const a = "${{ steps.aaaa.outputs.a }}";
-            const comment = `## 🤖 ${ a }
-
-              * asdasd
-
-            `;
-            const { owner, repo, number } = context.issue;
-            await github.rest.issues.createComment({ owner, repo, issue_number: number, body: comment });
+      - run: |
+          set -x
+          PR_NUMBER=${{ github.event.number }}
+          GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+          COMMENT="Thank you for the pull request! 🚀"
+          curl \
+            --request POST \
+            --header "Accept: application/vnd.github+json" \
+            --header "Authorization: Bearer $GITHUB_TOKEN" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            --data "{\"body\":\"$COMMENT\"}" \
+            --url https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments
 

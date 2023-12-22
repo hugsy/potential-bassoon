@@ -24,10 +24,9 @@ jobs:
 
       - name: Post comment on PR
         run: |
-          PR_NUMBER=$(echo "${{ github.event.number }}")
-          COMMENT="Thank you for the pull request! 🚀"
+          PR_NUMBER=${{ github.event.number }}
           GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
-
+          COMMENT="Thank you for the pull request! 🚀"
           curl \
             -X POST \
             -H "Accept: application/vnd.github+json" \
@@ -35,16 +34,3 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             -d "{\"body\":\"$COMMENT\"}" \
             "https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
-
-      - uses: actions/github-script@v7
-        with:
-          script: |
-            const a = "${{ steps.aaaa.outputs.a }}";
-            const comment = `## 🤖 ${ a }
-
-              * asdasd
-
-            `;
-            const { owner, repo, number } = context.issue;
-            await github.rest.issues.createComment({ owner, repo, issue_number: number, body: comment });
-

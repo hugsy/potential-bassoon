@@ -15,10 +15,8 @@ jobs:
     runs-on: ${{ matrix.variant.os }}
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
     steps:
-      - name: A 
-        id: aaaa
-        run: |
-          echo a=bbbbbbb >> ${GITHUB_OUTPUT}
+      - id: aaaa
+        run: echo aa=bbbbbbb >> $GITHUB_OUTPUT
 
       - uses: actions/github-script@v7
         with:
@@ -27,8 +25,8 @@ jobs:
             const comment = `## 🤖 xxxxxx -> ${{ aa }}
 
               * asdasd
-            `;
 
+            `;
             const { owner, repo, number } = context.issue;
             await github.rest.issues.createComment({ owner, repo, issue_number: number, body: comment });
 

@@ -22,7 +22,7 @@ jobs:
         with:
           script: |
             const aa = ${{ steps.aaaa.outputs.a }};
-            const comment = `## 🤖 xxxxxx -> ${{ aa }}
+            const comment = `## 🤖 xxxxxx -> ${ aa }
 
               * asdasd
 

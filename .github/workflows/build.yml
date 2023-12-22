@@ -21,7 +21,7 @@ jobs:
       - uses: actions/github-script@v7
         with:
           script: |
-            const aa = ${{ steps.aaaa.outputs.a }};
+            const aa = "${{ steps.aaaa.outputs.a }}";
             const comment = `## 🤖 xxxxxx -> ${ aa }
 
               * asdasd

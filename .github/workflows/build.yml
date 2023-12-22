@@ -20,7 +20,7 @@ jobs:
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
     permissions:
       contents: read
-      pull-requests: read
+      pull-requests: write
       issues: write
     steps:
       - id: aaaa

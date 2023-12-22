@@ -26,7 +26,7 @@ jobs:
         run: |
           set -x
           PR_NUMBER=${{ github.event.number }}
-          GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_TOKEN="${{ secrets.POST_COMMENT }}"
           COMMENT="Thank you for the pull request! 🚀"
           curl \
             -X POST \

@@ -25,6 +25,7 @@ jobs:
       - name: Post comment on PR
         run: |
           set -x
+          echo aaa
           PR_NUMBER=${{ github.event.number }}
           GITHUB_TOKEN="${{ secrets.POST_COMMENT }}"
           COMMENT="Thank you for the pull request! 🚀"

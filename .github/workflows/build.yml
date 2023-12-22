@@ -1,5 +1,9 @@
 name: tests
-on: push
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
 
 jobs:
   build:
@@ -8,21 +12,25 @@ jobs:
       matrix:
         python-version: [3.9]
         variant:
-          - {os: windows-latest, generator: msvc, arch: x64, config: Release} 
+          # - {os: windows-latest, generator: msvc, arch: x64, config: Release} 
           - {os: ubuntu-latest, generator: clang, arch: x64, config: Release} 
-          - {os: macos-latest, generator: clang, arch: x64, config: Release} 
+          # - {os: macos-latest, generator: clang, arch: x64, config: Release} 
 
     runs-on: ${{ matrix.variant.os }}
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
     steps:
-      - name: A 
-        if: matrix.variant.os == 'windows-latest'
-        run: |
-          C:\msys64\usr\bin\pacman.exe --confirm -Syuu
-          C:\msys64\usr\bin\pacman.exe --noconfirm -S mingw-w64-x86_64-gdb-multiarch 
-      - name: B 
-        if: matrix.variant.os == 'windows-latest'
-        run: |
-          C:\msys64\mingw64\bin\gdb-multiarch.exe -ex 'pi print("hello")' --ex quit c:\windows\system32\notepad.exe
+      - id: aaaa
+        run: echo a=bbbbbbb >> $GITHUB_OUTPUT
 
-          
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const a = "${{ steps.aaaa.outputs.a }}";
+            const comment = `## 🤖 ${ a }
+
+              * asdasd
+
+            `;
+            const { owner, repo, number } = context.issue;
+            await github.rest.issues.createComment({ owner, repo, issue_number: number, body: comment });
+

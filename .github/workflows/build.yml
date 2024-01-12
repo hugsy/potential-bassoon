@@ -28,14 +28,7 @@ jobs:
 
       - run: |
           set -x
-          PR_NUMBER=${{ github.event.number }}
-          GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
-          COMMENT="Thank you for the pull request! 🚀"
-          curl \
-            --request POST \
-            --header "Accept: application/vnd.github+json" \
-            --header "Authorization: Bearer $GITHUB_TOKEN" \
-            --header "X-GitHub-Api-Version: 2022-11-28" \
-            --data "{\"body\":\"$COMMENT\"}" \
-            --url https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments
+          sudo apt update
+          sudo apt install -y rr
+          rr record date
 

@@ -31,9 +31,7 @@ jobs:
 
       - run: |
           set -x
+          cmake --version
           sudo apt update
-          sudo apt install -y rr
-          echo 'kernel.perf_event_paranoid = 1' | sudo tee -a /etc/sysctl.d/10-rr.conf
-          sudo sysctl -p          
-          sudo rr record date
+
 

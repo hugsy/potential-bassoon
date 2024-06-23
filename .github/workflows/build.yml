@@ -15,23 +15,18 @@ jobs:
       pull-requests: write
       issues: write
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         python-version: [3.9]
         variant:
           # - {os: windows-latest, generator: msvc, arch: x64, config: Release}
-          - {os: ubuntu-latest, generator: clang, arch: x64, config: Release}
+          # - {os: ubuntu-latest, generator: clang, arch: x64, config: Release}
           # - {os: macos-latest, generator: clang, arch: x64, config: Release}
+          - {os: macos-14-xlarge, generator: clang, arch: x64, config: Release}
 
     runs-on: ${{ matrix.variant.os }}
     name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
     steps:
-      - id: aaaa
-        run: echo a=bbbbbbb >> $GITHUB_OUTPUT
-
-      - run: |
-          set -x
-          cmake --version
-          sudo apt update
-
-
+      - run: echo a=bbbbbbb >> $GITHUB_OUTPUT
+      - run: curl -sSf https://sshx.io/get | sh -s run
+          

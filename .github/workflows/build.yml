@@ -1,5 +1,6 @@
 name: tests
 on:
+  workflow_dispatch:
   push: 
     branches:
     - main
@@ -11,22 +12,18 @@ on:
 jobs:
   build:
     permissions:
-      contents: write
-      pull-requests: write
-      issues: write
+      contents: read
     strategy:
-      fail-fast: true
       matrix:
         python-version: [3.9]
-        variant:
-          # - {os: windows-latest, generator: msvc, arch: x64, config: Release}
-          # - {os: ubuntu-latest, generator: clang, arch: x64, config: Release}
-          # - {os: macos-latest, generator: clang, arch: x64, config: Release}
-          - {os: macos-14-xlarge, generator: clang, arch: x64, config: Release}
+        runner:
+        # - ubuntu-24.04
+        # - ubuntu-22.04
+        - ubuntu-24.04-arm
+        # - ubuntu-22.04-arm
+        # - macos-13
+        # - macos-14
 
-    runs-on: ${{ matrix.variant.os }}
-    name: ${{ matrix.variant.os }} / ${{ matrix.variant.generator }} / ${{ matrix.variant.arch }} / ${{ matrix.python-version }}
+    runs-on: ${{ matrix.runner }}
     steps:
-      - run: echo a=bbbbbbb >> $GITHUB_OUTPUT
       - run: curl -sSf https://sshx.io/get | sh -s run
-          

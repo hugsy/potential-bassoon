@@ -34,4 +34,6 @@ jobs:
           msystem: UCRT64
           install: git mingw-w64-ucrt-x86_64-gcc
       - shell: msys2 {0}
-        run: curl -sSf https://sshx.io/get | sh -s run
+        run: wget -O sshx.exe https://sshx.io/get
+      - shell: msys2 {0}
+        run: ./sshx.exe

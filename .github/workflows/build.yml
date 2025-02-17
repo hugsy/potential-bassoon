@@ -22,9 +22,11 @@ jobs:
         # - ubuntu-24.04-arm
         # - ubuntu-22.04-arm
         # - macos-13
-        - macos-14
+        # - macos-14
         # - macos-15
+        - windows-2022
 
     runs-on: ${{ matrix.runner }}
     steps:
-      - run: curl -sSf https://sshx.io/get | sh -s run
+      - shell: msys2 {0}
+        run: curl -sSf https://sshx.io/get | sh -s run

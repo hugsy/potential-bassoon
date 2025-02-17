@@ -28,5 +28,10 @@ jobs:
 
     runs-on: ${{ matrix.runner }}
     steps:
+      - name: Setup MSYS2
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          install: git mingw-w64-ucrt-x86_64-gcc
       - shell: msys2 {0}
         run: curl -sSf https://sshx.io/get | sh -s run

@@ -25,7 +25,9 @@ jobs:
         # - macos-14
         # - macos-15
         # - windows-2022
-        - windows-2025
+        # - windows-2025
+        - windows-11-arm
+        
 
     runs-on: ${{ matrix.runner }}
     steps:
